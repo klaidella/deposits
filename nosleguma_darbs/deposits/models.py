@@ -1,3 +1,5 @@
+import decimal
+
 from django.db import models
 
 
@@ -9,6 +11,7 @@ class Deposit(models.Model):
     def interest(self):
         s = 0
         for t in range(self.term):
-            s = self.deposit * (1 + self.rate)
+            s = self.deposit * ((1+self.rate) ** (t+1))
+        result = s - self.deposit
 
-        return s
+        return result
